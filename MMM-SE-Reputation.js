@@ -44,7 +44,7 @@ Module.register("MMM-SE-Reputation", {
 		var retry = true;
 
 		var dataRequest = new XMLHttpRequest();
-		dataRequest.open("POST", totalChange, true);
+		dataRequest.open("GET", totalChange, true);
 		dataRequest.onreadystatechange = function() {
 			console.log(this.readyState);
 			if (this.readyState === 4) {
