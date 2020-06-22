@@ -24,14 +24,6 @@
     }
   </script>
   <!-- End Jekyll SEO tag -->
-  <script type="text/javascript">
-  var url_string = window.location.href;
-var url = new URL(url_string);
-var authCode = url.searchParams.get("code");
-document.getElementById("authCode").innerHTML = authCode;
-document.getElementById("authCodeInline").innnerHTML = authCode;
-console.log(authCode);
-  </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#157878">
@@ -77,7 +69,17 @@ console.log(authCode);
 
 
 
+  <script type="text/javascript">
+  var url_string = window.location.href;
+console.log(url_string);
+var url = new URL(url_string);
+var authCode = url.searchParams.get("code");
+console.log(authCode);
 
+document.getElementById("authCode").innerHTML = authCode;
+document.getElementById("authCodeInline").innnerHTML = authCode;
+console.log(authCode);
+  </script>
 </body>
 
 </html>
