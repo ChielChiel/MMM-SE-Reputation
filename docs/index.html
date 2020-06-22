@@ -79,7 +79,7 @@
       var url = new URL(url_string);
       var authCode = url.searchParams.get("code");
       console.log(document.getElementById("plsWork"));
-      document.getElementById("plsWork").innerHTML = "ke";
+      document.getElementById("plsWork").innerHTML = '"' + authCode + '"';
       console.log(document.getElementById("plsWork").innerHTML);
       document.getElementById("authCode").innerHTML = authCode;
   }
