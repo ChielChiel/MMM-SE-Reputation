@@ -38,7 +38,7 @@ Module.register("MMM-SE-Reputation", {
 	 */
 	getData: function() {
 		var self = this;
-
+https://stackoverflow.com/oauth?client_id=18128&scope=private_info&redirect_uri=chielchiel.github.io%2FMMM-SE-Reputation
 		var urlApi = "https://api.stackexchange.com/2.2/me/reputation-history/full?pagesize=61&site=stackoverflow&filter=!-.i.zWaXtSCd";
 		var retry = true;
 
@@ -131,7 +131,6 @@ Module.register("MMM-SE-Reputation", {
 		//FIXME: This can be load a one file javascript definition
 		return {
 			en: "translations/en.json",
-			es: "translations/es.json"
 		};
 	},
 
