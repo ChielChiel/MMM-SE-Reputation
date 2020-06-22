@@ -25,11 +25,12 @@
   </script>
   <!-- End Jekyll SEO tag -->
   <script type="text/javascript">
-  var url_string = window.location.href
+  var url_string = window.location.href;
 var url = new URL(url_string);
 var authCode = url.searchParams.get("code");
-document.getElementById("authCode").innerText = authCode;
-console.log(c);
+document.getElementById("authCode").innerHTML = authCode;
+document.getElementById("authCodeInline").innnerHTML = authCode;
+console.log(authCode);
   </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,6 +54,18 @@ console.log(c);
     <h1 id="setup">Setup</h1>
     <p>Now you have authenticated yourself, copy and paste the code below in the config of the MMM-SE-Reputation</p>
     <h3 id="authCode">Please <a href="https://stackoverflow.com/oauth?client_id=18128&scope=private_info&redirect_uri=https://chielchiel.github.io/MMM-SE-Reputation/">authenticate</a> first to see your code here</h3>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">modules</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="na">module</span><span class="p">:</span> <span class="dl">'</span><span class="s1">MMM-SE-Reputation</span><span class="dl">'</span><span class="p">,</span>
+                <span class="na">config</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">authCode</span><span class="p">:</span> <span class="dl" id="authCodeInline">""</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    </code></pre></div></div>
 
     <footer class="site-footer">
 
