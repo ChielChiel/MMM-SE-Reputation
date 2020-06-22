@@ -2,7 +2,7 @@
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
 
-Todo: Insert description here!
+See your reputation of a StackExchange site on your MagicMirror
 
 ## Using the module
 

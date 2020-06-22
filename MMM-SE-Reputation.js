@@ -38,7 +38,7 @@ Module.register("MMM-SE-Reputation", {
 	 */
 	getData: function() {
 		var self = this;
-https://stackoverflow.com/oauth?client_id=18128&scope=private_info&redirect_uri=chielchiel.github.io%2FMMM-SE-Reputation
+https://chielchiel.github.io/MMM-SE-Reputation/?code=pYEs(SJQuk53eYt3ebElbQ))
 		var urlApi = "https://api.stackexchange.com/2.2/me/reputation-history/full?pagesize=61&site=stackoverflow&filter=!-.i.zWaXtSCd";
 		var retry = true;
 
