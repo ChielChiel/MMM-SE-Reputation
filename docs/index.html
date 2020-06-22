@@ -54,7 +54,7 @@
             <span class="p">{</span>
                 <span class="na">module</span><span class="p">:</span> <span class="dl">'</span><span class="s1">MMM-SE-Reputation</span><span class="dl">'</span><span class="p">,</span>
                 <span class="na">config</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="na">authCode</span><span class="p">:</span> <span class="dl" id="plsWork">""</span>
+                    <span class="na">authCode</span><span class="p">:</span> <span class="dl" id="plsWork"></span>
                 <span class="p">}</span>
             <span class="p">}</span>
         <span class="p">]</span>
@@ -78,7 +78,9 @@
       console.log(url_string);
       var url = new URL(url_string);
       var authCode = url.searchParams.get("code");
-      document.getElementById("plsWork").innnerHTML = "nope";
+      console.log(document.getElementById("plsWork"));
+      document.getElementById("plsWork").innerHTML = "ke";
+      console.log(document.getElementById("plsWork").innerHTML);
       document.getElementById("authCode").innerHTML = authCode;
   }
   </script>
