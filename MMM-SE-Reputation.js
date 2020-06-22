@@ -40,7 +40,7 @@ Module.register("MMM-SE-Reputation", {
 		var self = this;
 //https://chielchiel.github.io/MMM-SE-Reputation/?code=pYEs(SJQuk53eYt3ebElbQ))
 		var apiBase = "https://api.stackexchange.com";
-		var totalChange = apiBase + "/2.2/users/8902440/reputation-history/full/?site=stackoverflow";
+		var totalChange = apiBase + "/2.2/users/8902440/reputation-history/?site=stackoverflow";
 		var retry = true;
 
 		var dataRequest = new XMLHttpRequest();
