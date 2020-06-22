@@ -73,14 +73,13 @@
 
 
   <script type="text/javascript">
-    functio setAuth() {
-    var url_string = window.location.href;
-    console.log(url_string);
-    var url = new URL(url_string);
-    var authCode = url.searchParams.get("code");
-    document.getElementById("plsWork").innnerHTML = "nope";
-
-    document.getElementById("authCode").innerHTML = authCode;
+    function setAuth() {
+      var url_string = window.location.href;
+      console.log(url_string);
+      var url = new URL(url_string);
+      var authCode = url.searchParams.get("code");
+      document.getElementById("plsWork").innnerHTML = "nope";
+      document.getElementById("authCode").innerHTML = authCode;
   }
   </script>
 
