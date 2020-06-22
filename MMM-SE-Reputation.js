@@ -63,7 +63,9 @@ Module.register("MMM-SE-Reputation", {
 				}
 			}
 		};
-		dataRequest.send("key=2rc7G)AiEvdk6q6TS08GGg((&access_token=FDeXMTE2CNpzTPFVa1StEw))");
+		//dataRequest.send("key=2rc7G)AiEvdk6q6TS08GGg((&access_token=FDeXMTE2CNpzTPFVa1StEw))");
+		dataRequest.send("key=2rc7G%29AiEvdk6q6TS08GGg%28%28&access_token=FDeXMTE2CNpzTPFVa1StEw%29%29");
+
 	},
 
 
