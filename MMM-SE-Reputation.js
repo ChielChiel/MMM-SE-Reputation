@@ -38,12 +38,13 @@ Module.register("MMM-SE-Reputation", {
 	 */
 	getData: function() {
 		var self = this;
-https://chielchiel.github.io/MMM-SE-Reputation/?code=pYEs(SJQuk53eYt3ebElbQ))
-		var urlApi = "https://api.stackexchange.com/2.2/me/reputation-history/full?pagesize=61&site=stackoverflow&filter=!-.i.zWaXtSCd";
+//https://chielchiel.github.io/MMM-SE-Reputation/?code=pYEs(SJQuk53eYt3ebElbQ))
+		var apiBase = "https://api.stackexchange.com/";
+		var totalChange = apiBase + "/2.2/me/reputation-history/full?site=stackoverflow&filter=!bTNirRsNyn3sEl";
 		var retry = true;
 
 		var dataRequest = new XMLHttpRequest();
-		dataRequest.open("GET", urlApi, true);
+		dataRequest.open("POST", totalChange, true);
 		dataRequest.onreadystatechange = function() {
 			console.log(this.readyState);
 			if (this.readyState === 4) {
@@ -62,7 +63,7 @@ https://chielchiel.github.io/MMM-SE-Reputation/?code=pYEs(SJQuk53eYt3ebElbQ))
 				}
 			}
 		};
-		dataRequest.send();
+		dataRequest.send("key=2rc7G)AiEvdk6q6TS08GGg((&access_token=FDeXMTE2CNpzTPFVa1StEw))");
 	},
 
 

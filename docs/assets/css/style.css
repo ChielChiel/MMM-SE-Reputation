@@ -10,6 +10,11 @@ body {
     margin:0
 }
 
+#setup {
+  margin: auto;
+  color: black !important;
+}
+
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
     display:block
 }

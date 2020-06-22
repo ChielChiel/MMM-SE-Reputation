@@ -74,15 +74,18 @@
 
   <script type="text/javascript">
     function setAuth() {
-      var url_string = window.location.href;
-      console.log(url_string);
-      var url = new URL(url_string);
-      var authCode = url.searchParams.get("code");
-      console.log(document.getElementById("plsWork"));
+      var hash = window.location.hash.substr(1);
+
+      var result = hash.split('&').reduce(function(result, item) {
+        var parts = item.split('=');
+        result[parts[0]] = parts[1];
+        return result;
+      }, {});
+
+      var authCode = result.access_token;
       document.getElementById("plsWork").innerHTML = '"' + authCode + '"';
-      console.log(document.getElementById("plsWork").innerHTML);
       document.getElementById("authCode").innerHTML = authCode;
-  }
+    }
   </script>
 
 </body>
