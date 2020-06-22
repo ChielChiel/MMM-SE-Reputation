@@ -39,7 +39,7 @@ Module.register("MMM-SE-Reputation", {
 	getData: function() {
 		var self = this;
 //https://chielchiel.github.io/MMM-SE-Reputation/?code=pYEs(SJQuk53eYt3ebElbQ))
-		var apiBase = "https://api.stackexchange.com/";
+		var apiBase = "https://api.stackexchange.com";
 		var totalChange = apiBase + "/2.2/me/reputation-history/full?site=stackoverflow&filter=!bTNirRsNyn3sEl";
 		var retry = true;
 
