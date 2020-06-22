@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://chielchiel.github.io/MMM-SE-Reputation/assets/css/style.css">
 </head>
 
-<body>
+<body onload="setAuth();">
   <section class="page-header">
     <h1 class="project-name">MMM-SE-Reputation</h1>
     <h2 class="project-tagline">See your reputation of a StackExchange site on your MagicMirror</h2>
@@ -73,6 +73,7 @@
 
 
   <script type="text/javascript">
+    functio setAuth() {
     var url_string = window.location.href;
     console.log(url_string);
     var url = new URL(url_string);
@@ -80,6 +81,7 @@
     document.getElementById("plsWork").innnerHTML = "nope";
 
     document.getElementById("authCode").innerHTML = authCode;
+  }
   </script>
 
 </body>
