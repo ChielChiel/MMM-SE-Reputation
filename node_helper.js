@@ -18,7 +18,7 @@ module.exports = NodeHelper.create({
 	 * argument payload mixed - The payload of the notification.
 	 */
 	socketNotificationReceived: function(notification, payload) {
-		if (notification === "MMM-SE-Reputation-NOTIFICATION_TEST") {
+		if (notification === "MMM-SE-Reputation-NOTFICATION_TEST") {
 			console.log("Working notification system. Notification:", notification, "payload: ", payload);
 			// Send notification
 			this.sendNotificationTest(this.anotherFunction()); //Is possible send objects :)

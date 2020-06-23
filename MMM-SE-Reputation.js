@@ -9,25 +9,41 @@
 
 Module.register("MMM-SE-Reputation", {
 	defaults: {
-		updateInterval: 60000,
-		retryDelay: 5000
+		updateInterval: 1 * 60 * 1000,
+		animationSpeed:  1000,
+		userId: "8902440",
+		site: "stackoverflow",
+		access_token: "lalga5jt0tnMj7rI5q8XJQ))"
 	},
 
-	requiresVersion: "2.1.0", // Required version of MagicMirror
+	//requiresVersion: "2.1.0", // Required version of MagicMirror
 
 	start: function() {
 		var self = this;
 		var dataRequest = null;
 		var dataNotification = null;
-
+		var lastUpdate = this.getDate();
+		var totalRecords = null;
+		var recordsJson;
+		var pageSetup;
 		//Flag for check if module is loaded
 		this.loaded = false;
 
 		// Schedule update timer.
-		this.getData();
+		this.getData("&filter=!Lewuc(5)R7)tVLuxE1D0Tg");
 		setInterval(function() {
+			console.log("SE: domUpdate");
 			self.updateDom();
 		}, this.config.updateInterval);
+	},
+
+
+	getDate: function() {
+		var today = new Date();
+		var hour = String(today.getHours()).padStart(2, '0');
+		var minute = String(today.getMinutes() + 1).padStart(2, '0'); //January is 0!
+
+		return hour + ":" + minute;
 	},
 
 	/*
@@ -36,12 +52,17 @@ Module.register("MMM-SE-Reputation", {
 	 * get a URL request
 	 *
 	 */
-	getData: function() {
+	getData: function(filter = "", pageSetup = "") {
 		var self = this;
 //https://chielchiel.github.io/MMM-SE-Reputation/?code=pYEs(SJQuk53eYt3ebElbQ))
 		var apiBase = "https://api.stackexchange.com";
-		var totalChange = apiBase + "/2.2/users/8902440/reputation-history/?site=stackoverflow";
+		var totalChange = apiBase + "/2.2/users/" + this.config.userId +  "/reputation-history/full/?site=" + this.config.site;
+		totalChange = totalChange + pageSetup;
+		totalChange = totalChange + "&key=2rc7G)AiEvdk6q6TS08GGg((&access_token=" + this.config.access_token;
+		totalChange = totalChange + filter;
+
 		var retry = true;
+		console.log(totalChange);
 
 		var dataRequest = new XMLHttpRequest();
 		dataRequest.open("GET", totalChange, true);
@@ -50,7 +71,10 @@ Module.register("MMM-SE-Reputation", {
 			if (this.readyState === 4) {
 				console.log(this.status);
 				if (this.status === 200) {
-					self.processData(JSON.parse(this.response));
+					let result = JSON.parse(this.response);
+					result.filter = filter;
+					console.log(result);
+					self.processData(result);
 				} else if (this.status === 401) {
 					self.updateDom(self.config.animationSpeed);
 					Log.error(self.name, this.status);
@@ -63,9 +87,9 @@ Module.register("MMM-SE-Reputation", {
 				}
 			}
 		};
-		//dataRequest.send("key=2rc7G)AiEvdk6q6TS08GGg((&access_token=FDeXMTE2CNpzTPFVa1StEw))");
-		// dataRequest.send("key=2rc7G%29AiEvdk6q6TS08GGg%28%28&access_token=FDeXMTE2CNpzTPFVa1StEw%29%29");
 		dataRequest.send();
+		 //dataRequest.send("key=2rc7G%29AiEvdk6q6TS08GGg%28%28&access_token=FDeXMTE2CNpzTPFVa1StEw%29%29");
+		//dataRequest.send();
 
 	},
 
@@ -84,6 +108,7 @@ Module.register("MMM-SE-Reputation", {
 		nextLoad = nextLoad ;
 		var self = this;
 		setTimeout(function() {
+			console.log("standard");
 			self.getData();
 		}, nextLoad);
 	},
@@ -95,6 +120,7 @@ Module.register("MMM-SE-Reputation", {
 		var wrapper = document.createElement("div");
 		// If this.dataRequest is not empty
 		if (this.dataRequest) {
+			console.log(this.dataRequest);
 			var wrapperDataRequest = document.createElement("div");
 			// check format https://jsonplaceholder.typicode.com/posts/1
 			wrapperDataRequest.innerHTML = this.dataRequest.title;
@@ -102,7 +128,7 @@ Module.register("MMM-SE-Reputation", {
 			var labelDataRequest = document.createElement("label");
 			// Use translate function
 			//             this id defined in translations files
-			labelDataRequest.innerHTML = this.translate("TITLE");
+			labelDataRequest.innerHTML = this.translate("TITLE") + this.lastUpdate;
 
 
 			wrapper.appendChild(labelDataRequest);
@@ -124,7 +150,7 @@ Module.register("MMM-SE-Reputation", {
 		return [];
 	},
 
-	getStyles: function () {
+	getStyles: function() {
 		return [
 			"MMM-SE-Reputation.css",
 		];
@@ -140,13 +166,73 @@ Module.register("MMM-SE-Reputation", {
 
 	processData: function(data) {
 		var self = this;
-		this.dataRequest = data;
-		if (this.loaded === false) { self.updateDom(self.config.animationSpeed) ; }
-		this.loaded = true;
+		if (data.filter == "&filter=!Lewuc(5)R7)tVLuxE1D0Tg") { //First check
+			if (data.total != null) {
+				this.totalRecords = data.total;
+				Log.log(this.paginate(this.totalRecords));
+				this.pageSetup = this.paginate(this.totalRecords);
+			}
+			// TODO: request first page
+			console.log(this.pageSetup[1]) // 61;
+			this.getData("&filter=!)s-s.dGJ.5)siJpoc0uw", "&page=1&pagesize=" + this.pageSetup[1])
+
+		} else if (data.filter == "&filter=!)s-s.dGJ.5)siJpoc0uw") { //normal data
+			this.page = data.page;
+			console.log(this.pageSetup + "; len: " + this.pageSetup.length); //[1: 100, 2:100, 3:33]
+
+			if (this.page == this.pageSetup.length - 1) {
+
+				if (this.recordsJson == null) {
+					this.recordsJson = data.items;
+				} else {
+					this.recordsJson = this.recordsJson.concat(data.items);
+				}
+
+				this.dataRequest = this.recordsJson;
+				this.loaded = true;
+
+			} else {
+				this.recordsJson = this.recordsJson.concat(data.items);
+				this.getData("&filter=!)s-s.dGJ.5)siJpoc0uw", "&page=" + (this.page + 1) +"&pagesize=" + this.pageSetup[this.page + 1])
+			}
+
+
+
+		}
+
+
+
+
+		if (this.loaded === false) {
+			this.lastUpdate = this.getDate();
+			self.updateDom(self.config.animationSpeed);
+		}
+
 
 		// the data if load
 		// send notification to helper
-		this.sendSocketNotification("MMM-SE-Reputation-NOTIFICATION_TEST", data);
+		//this.sendSocketNotification("MMM-SE-Reputation-NOTIFICATION_TEST", data);
+	},
+
+	paginate: function(total) {
+		//let total = 233;
+		let lastPage =  total % 100; //33
+		let isLastPageEmpty = (lastPage == 0);
+		let pages = (isLastPageEmpty) ? Math.floor(total / 100) : Math.floor(total / 100) + 1; //3
+		//console.log("pages" + pages);
+
+
+		let pageOrder = new Array();
+		for (var i = 1; i <= (pages); i++) {
+			let itemsOnPage = 100;
+			if (i == pages && !isLastPageEmpty) { //3 == 3
+				itemsOnPage = lastPage;
+			}
+			pageOrder[i] = itemsOnPage;
+		}
+		//console.log("totalpage" + JSON.stringify(pageOrder));
+		//console.log("totalpage2" + pageOrder);
+		return pageOrder;
 	},
 
 	// socketNotificationReceived from helper
