@@ -9,7 +9,7 @@ See your reputation of a StackExchange site on your MagicMirror
 ### Authenticate
 First of all you should authenticate this module to read your reputation.
 You can authenticate by going to this url:
-https://stackoverflow.com/oauth/dialog/?client_id=18128&scope=private_info&redirect_uri=https://chielchiel.github.io/MMM-SE-Reputation/
+https://stackoverflow.com/oauth/dialog/?client_id=18128&scope=private_info,no_expiry&redirect_uri=https://chielchiel.github.io/MMM-SE-Reputation/
 
 After authentication and redirects you will see your code. Copy that code and paste it in the `config` below:
 
@@ -20,7 +20,11 @@ var config = {
         {
             module: 'MMM-SE-Reputation',
             config: {
-                authCode: ""
+                authCode: "",
+                userId: "8902440",
+                updateInterval: 1 * 60 * 1000,
+            		site: "stackoverflow",
+            		show_graph_months: 6,
             }
         }
     ]

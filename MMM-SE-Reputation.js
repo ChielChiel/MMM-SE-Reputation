@@ -13,7 +13,8 @@ Module.register("MMM-SE-Reputation", {
 		animationSpeed:  1000,
 		userId: "8902440",
 		site: "stackoverflow",
-		access_token: "lalga5jt0tnMj7rI5q8XJQ))"
+		access_token: "GpAfa3tZJ(kXs2gmHmZFvA))",
+		show_graph_months: 6,
 	},
 
 	//requiresVersion: "2.1.0", // Required version of MagicMirror
@@ -115,31 +116,91 @@ Module.register("MMM-SE-Reputation", {
 
 	getDom: function() {
 		var self = this;
-
+		console.log("dom?");
 		// create element wrapper for show into the module
-		var wrapper = document.createElement("div");
+		var wrapper = document.createElement('div');
+		wrapper.style.border = "1px solid white";
+
+		this.canvas = document.createElement("canvas");
+		this.canvas.width = "300";
+		this.canvas.height = "200";
+		this.canvas.id = "SE-Chart";
+
+		wrapper.appendChild(this.canvas);
+
+		let alignMent = self.data.position.includes("left") ? "left" : "right";
 		// If this.dataRequest is not empty
 		if (this.dataRequest) {
-			console.log(this.dataRequest);
-			var wrapperDataRequest = document.createElement("div");
-			// check format https://jsonplaceholder.typicode.com/posts/1
-			wrapperDataRequest.innerHTML = this.dataRequest.title;
+			var totalReputation = 1;
+			var reputationData = new Array();
+			var reputationLabels = new Array();
+			for (var reputationItem of this.dataRequest) {
+				totalReputation += reputationItem.reputation_change;
+				reputationLabels.push(new Date(reputationItem.creation_date * 1000));
+				reputationData.push(totalReputation);
+			}
 
-			var labelDataRequest = document.createElement("label");
-			// Use translate function
-			//             this id defined in translations files
-			labelDataRequest.innerHTML = this.translate("TITLE") + this.lastUpdate;
 
+			var myLineChart = new Chart(this.canvas, {
+				type: 'line',
+				title: 'hello',
+				data: {
+					labels: reputationLabels,
+					datasets: [{
+						backgroundColor: "rgba(255, 255, 255, 0.1)",
+						borderColor: "rgba(255, 255, 255, 1)",
+						data: reputationData,
+						fill: "start",
+						lineTension: "0.1",
+						pointRadius: 0,
+					}]
+				},
+				options: {
+					title: {
+						display: true,
+						fontColor: 'red',
+					},
+					legend: {
+						display: false,
+						labels: {
+							fontColor: 'rgb(255, 99, 132)'
+						}
+					},
+					scales: {
+						yAxes: [{
+							gridLines: {
+								color: "rgba(255, 255, 255, 0.3)",
+							},
+							position: alignMent,
+						}],
+						xAxes: [{
+							ticks: {
+								callback: function(value, index, values) {
+									let len = values.length - 1;
+									let returnVal = value.getDate() + "/" + (value.getMonth() + 1) + " '" + String(value.getFullYear()).substring(2, 4);
+									//if ((index % Math.floor(len / 3) === 0) || (index % Math.floor(len / (len / 10)) === 0)) {
+										return returnVal;
+									//} else {
+										//return '';
+									//}
+								}
+							}
+						}],
+					}
+				}
+			});
 
-			wrapper.appendChild(labelDataRequest);
-			wrapper.appendChild(wrapperDataRequest);
+		} else {
+			console.log("no data");
 		}
+
 
 		// Data from helper
 		if (this.dataNotification) {
+			console.log("notification");
 			var wrapperDataNotification = document.createElement("div");
 			// translations  + datanotification
-			wrapperDataNotification.innerHTML =  this.translate("UPDATE") + ": " + this.dataNotification.date;
+			wrapperDataNotification.innerHTML = this.translate("UPDATE") + ": " + this.dataNotification.date;
 
 			wrapper.appendChild(wrapperDataNotification);
 		}
@@ -147,7 +208,9 @@ Module.register("MMM-SE-Reputation", {
 	},
 
 	getScripts: function() {
-		return [];
+		return [
+			"modules/MMM-SE-Reputation/chartjs/Chart.bundle.min.js",
+		];
 	},
 
 	getStyles: function() {
@@ -173,7 +236,7 @@ Module.register("MMM-SE-Reputation", {
 				this.pageSetup = this.paginate(this.totalRecords);
 			}
 			// TODO: request first page
-			console.log(this.pageSetup[1]) // 61;
+			//console.log(this.pageSetup[1]) // 61;
 			this.getData("&filter=!)s-s.dGJ.5)siJpoc0uw", "&page=1&pagesize=" + this.pageSetup[1])
 
 		} else if (data.filter == "&filter=!)s-s.dGJ.5)siJpoc0uw") { //normal data
@@ -188,9 +251,10 @@ Module.register("MMM-SE-Reputation", {
 					this.recordsJson = this.recordsJson.concat(data.items);
 				}
 
-				this.dataRequest = this.recordsJson;
+				this.dataRequest = this.recordsJson.reverse();
 				this.loaded = true;
-
+				//console.log("recordsJson:" + this.recordsJson + ";dataRequest: " + this.dataRequest);
+				self.updateDom(self.config.animationSpeed);
 			} else {
 				this.recordsJson = this.recordsJson.concat(data.items);
 				this.getData("&filter=!)s-s.dGJ.5)siJpoc0uw", "&page=" + (this.page + 1) +"&pagesize=" + this.pageSetup[this.page + 1])
