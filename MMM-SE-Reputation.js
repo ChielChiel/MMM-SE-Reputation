@@ -14,7 +14,6 @@ Module.register("MMM-SE-Reputation", {
 		userId: "8902440",
 		site: "stackoverflow",
 		access_token: "GpAfa3tZJ(kXs2gmHmZFvA))",
-		show_graph_months: 6,
 	},
 
 	//requiresVersion: "2.1.0", // Required version of MagicMirror
@@ -116,6 +115,7 @@ Module.register("MMM-SE-Reputation", {
 
 	getDom: function() {
 		var self = this;
+		
 		console.log("dom?");
 		// create element wrapper for show into the module
 		var wrapper = document.createElement('div');
