@@ -115,11 +115,10 @@ Module.register("MMM-SE-Reputation", {
 
 	getDom: function() {
 		var self = this;
-		
+		self.data.header = this.config.site + " STATS";
 		console.log("dom?");
 		// create element wrapper for show into the module
 		var wrapper = document.createElement('div');
-		wrapper.style.border = "1px solid white";
 
 		this.canvas = document.createElement("canvas");
 		this.canvas.width = "300";
@@ -129,7 +128,7 @@ Module.register("MMM-SE-Reputation", {
 		wrapper.appendChild(this.canvas);
 
 		let alignMent = self.data.position.includes("left") ? "left" : "right";
-		// If this.dataRequest is not empty
+
 		if (this.dataRequest) {
 			var totalReputation = 1;
 			var reputationData = new Array();
@@ -175,14 +174,8 @@ Module.register("MMM-SE-Reputation", {
 						}],
 						xAxes: [{
 							ticks: {
-								callback: function(value, index, values) {
-									let len = values.length - 1;
-									let returnVal = value.getDate() + "/" + (value.getMonth() + 1) + " '" + String(value.getFullYear()).substring(2, 4);
-									//if ((index % Math.floor(len / 3) === 0) || (index % Math.floor(len / (len / 10)) === 0)) {
-										return returnVal;
-									//} else {
-										//return '';
-									//}
+								callback: function(value) {
+										return value.getDate() + "/" + (value.getMonth() + 1) + " '" + String(value.getFullYear()).substring(2, 4);
 								}
 							}
 						}],

@@ -47,6 +47,9 @@
     <p>Now you have authenticated yourself, copy and paste the code below in the config of the MMM-SE-Reputation</p>
     <h3 id="authCode">Please <a href="https://stackoverflow.com/oauth?client_id=18128&scope=private_info&redirect_uri=https://chielchiel.github.io/MMM-SE-Reputation/">authenticate</a> first to see your code here</h3>
 
+    <p>Copy and paste your userpage's url below to autofill the configuration of this module:</p>
+    <input type="text" name="" value="" oninput="createConfig(this.value)" placeholder="https://stackoverflow.com/users/8902440/chiel">
+
     <div class="language-javascript highlighter-rouge">
       <div class="highlight">
         <pre class="highlight"><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
@@ -85,6 +88,20 @@
       var authCode = result.access_token;
       document.getElementById("plsWork").innerHTML = '"' + authCode + '"';
       document.getElementById("authCode").innerHTML = authCode;
+    }
+
+    function createConfig(url){
+      //https://stackapps.com/users/70158/chiel
+      url = url.includes("http://") ? url.replace("http://","") :
+          url.includes("https://") ? url.replace("https://","") : false;
+
+      stackapps.com/users/70158/chiel
+      let dataUrl = url.split("/");
+      let site = dataUrl[0].includes(".stackexchange.com") ? dataUrl[0].replace(".stackexchange.com", "") : dataUrl[0].replace(".com", "");
+      let userId = dataUrl[2];
+
+      console.log("site: " + site + "; user: " + userId);
+
     }
   </script>
 
