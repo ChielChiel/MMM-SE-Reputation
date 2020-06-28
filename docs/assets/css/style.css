@@ -17,9 +17,7 @@ body {
 
 #inputSite {
     width: 90%;
-    margin: 10px;
-    
-
+    margin: 10px 10px 20px 0px;
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {

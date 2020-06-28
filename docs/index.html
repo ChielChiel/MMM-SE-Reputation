@@ -93,7 +93,6 @@
     }
 
     function createConfig(url){
-      //https://stackapps.com/users/70158/chiel
       url = url.includes("http://") ? url.replace("http://","") :
           url.includes("https://") ? url.replace("https://","") : false;
 
@@ -102,7 +101,6 @@
       let userId = dataUrl[2];
       document.getElementById("userID").innerHTML = userId;
       document.getElementById("siteName").innerHTML = site;
-      console.log("site: " + site + "; user: " + userId);
 
     }
   </script>

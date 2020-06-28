@@ -35,7 +35,7 @@ var config = {
                 authCode: "", //Authentication code retrieved from the url above.
                 userId: "", //User id of the site
                 updateInterval: 15 * 60 * 1000, //How many milliseconds to a new update
-            	  site: "stackoverflow", //can be any StackExchange site
+            	site: "stackoverflow", //can be any StackExchange site
             }
         }
     ]
