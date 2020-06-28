@@ -43,7 +43,7 @@
   <section class="main-content">
     <h1 id="MMM-SE-Reputation">MMM-SE-Reputation</h1>
     <p>See your reputation of a StackExchange site on your MagicMirror</p>
-    <img src="/module_graph.png" alt="">
+    <img src="module_graph.png" alt="">
     <h1 id="setup">Setup</h1>
     <p>Now you have authenticated yourself, copy and paste the code below in the config of the MMM-SE-Reputation</p>
     <h3 id="authCode">Please <a href="https://stackoverflow.com/oauth?client_id=18128&scope=private_info&redirect_uri=https://chielchiel.github.io/MMM-SE-Reputation/">authenticate</a> first to see your code here</h3>
@@ -86,8 +86,10 @@
       }, {});
 
       var authCode = result.access_token;
-      document.getElementById("plsWork").innerHTML =  authCode;
-      document.getElementById("authCode").innerHTML = authCode;
+      if(authCode !== undefined) {
+        document.getElementById("plsWork").innerHTML =  authCode;
+        document.getElementById("authCode").innerHTML = authCode;
+      }
     }
 
     function createConfig(url){
