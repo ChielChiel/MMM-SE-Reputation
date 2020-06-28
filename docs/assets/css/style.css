@@ -15,6 +15,13 @@ body {
   color: black !important;
 }
 
+#inputSite {
+    width: 90%;
+    margin: 10px;
+    
+
+}
+
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
     display:block
 }
@@ -461,6 +468,7 @@ td, th {
 .highlight {
     background-color:#f8f8f8
 }
+
 
 
 * {

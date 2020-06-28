@@ -12,6 +12,7 @@
   <meta property="og:description" content="See your reputation of a StackExchange site on your MagicMirror">
   <link rel="canonical" href="https://chielchiel.github.io/MMM-SE-Reputation/">
   <meta property="og:url" content="https://chielchiel.github.io/MMM-SE-Reputation/">
+  <meta name="og:image" content="https://chielchiel.github.io/MMM-SE-Reputation/module_graph.png">
   <meta property="og:site_name" content="MMM-SE-Reputation">
   <script type="application/ld+json">
     {
@@ -42,29 +43,28 @@
   <section class="main-content">
     <h1 id="MMM-SE-Reputation">MMM-SE-Reputation</h1>
     <p>See your reputation of a StackExchange site on your MagicMirror</p>
-
+    <img src="/module_graph.png" alt="">
     <h1 id="setup">Setup</h1>
     <p>Now you have authenticated yourself, copy and paste the code below in the config of the MMM-SE-Reputation</p>
     <h3 id="authCode">Please <a href="https://stackoverflow.com/oauth?client_id=18128&scope=private_info&redirect_uri=https://chielchiel.github.io/MMM-SE-Reputation/">authenticate</a> first to see your code here</h3>
 
     <p>Copy and paste your userpage's url below to autofill the configuration of this module:</p>
-    <input type="text" name="" value="" oninput="createConfig(this.value)" placeholder="https://stackoverflow.com/users/8902440/chiel">
+    <input type="text" id="inputSite" name="site" value="" oninput="createConfig(this.value)" placeholder="https://stackoverflow.com/users/8902440/chiel">
 
-    <div class="language-javascript highlighter-rouge">
-      <div class="highlight">
-        <pre class="highlight"><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="na">modules</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="na">module</span><span class="p">:</span> <span class="dl">'</span><span class="s1">MMM-SE-Reputation</span><span class="dl">'</span><span class="p">,</span>
-                <span class="na">config</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="na">authCode</span><span class="p">:</span> <span class="dl" id="plsWork"></span>
-                <span class="p">}</span>
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">modules</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="na">module</span><span class="p">:</span> <span class="dl">'</span><span class="s1">MMM-SE-Reputation</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">config</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">authCode</span><span class="p">:</span> <span class="dl">"</span><span class="s2" id="plsWork">df</span><span class="dl">"</span><span class="p">,</span> <span class="c1">//Authentication code retrieved from the url above.</span>
+                <span class="na">userId</span><span class="p">:</span> <span class="dl">"</span><span class="s2" id="userID">8902440</span><span class="dl">"</span><span class="p">,</span> <span class="c1">//User id of the site</span>
+                <span class="na">updateInterval</span><span class="p">:</span> <span class="mi">15</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="c1">//How many milliseconds to a new update</span>
+            	<span class="na">site</span><span class="p">:</span> <span class="dl">"</span><span class="s2" id="siteName">stackoverflow</span><span class="dl">"</span><span class="p">,</span> <span class="c1">//can be any StackExchange site</span>
             <span class="p">}</span>
-        <span class="p">]</span>
-    <span class="p">}</span>
-    </code></pre>
-      </div>
-    </div>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     <footer class="site-footer">
 
@@ -86,7 +86,7 @@
       }, {});
 
       var authCode = result.access_token;
-      document.getElementById("plsWork").innerHTML = '"' + authCode + '"';
+      document.getElementById("plsWork").innerHTML =  authCode;
       document.getElementById("authCode").innerHTML = authCode;
     }
 
@@ -98,7 +98,8 @@
       let dataUrl = url.split("/");
       let site = dataUrl[0].includes(".stackexchange.com") ? dataUrl[0].replace(".stackexchange.com", "") : dataUrl[0].replace(".com", "");
       let userId = dataUrl[2];
-
+      document.getElementById("userID").innerHTML = userId;
+      document.getElementById("siteName").innerHTML = site;
       console.log("site: " + site + "; user: " + userId);
 
     }
