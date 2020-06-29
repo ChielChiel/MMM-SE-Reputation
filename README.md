@@ -50,3 +50,11 @@ var config = {
 | `userId`        | *Required*  Your id on the specific stackexchange site. <br><br>**Type:** `string`
 | `updateInterval` | Interval between updating the data <br><br>**Type:** `int`(milliseconds) <br>Default 900000 milliseconds (1 minute)
 | `site` | *Required* The name of the StackExchange site. <br><br>**Type:** `string` <br><br> For example stackoverflow or raspberrypi. Omit the `.stackexchange.com` if the site url has it.
+
+
+## Todo for v2
+Feel free to help!
+- [ ] Spread graph based on date instead of even spacing between points
+- [ ] Add carousel to show graphs of different sites
+    - [ ] Option to add multiple sites in config
+    - [ ] Setup `node_helper.js` to fetch multiple sites
