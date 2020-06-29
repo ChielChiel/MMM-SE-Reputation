@@ -121,8 +121,6 @@ Module.register("MMM-SE-Reputation", {
 		var wrapper = document.createElement('div');
 
 		this.canvas = document.createElement("canvas");
-		this.canvas.width = "300";
-		this.canvas.height = "200";
 		this.canvas.id = "SE-Chart";
 
 		wrapper.appendChild(this.canvas);
