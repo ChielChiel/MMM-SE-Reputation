@@ -11,9 +11,9 @@ Module.register("MMM-SE-Reputation", {
 	defaults: {
 		updateInterval: 1 * 60 * 1000,
 		animationSpeed:  1000,
-		userId: "8902440",
+		userId: "",
 		site: "stackoverflow",
-		access_token: "GpAfa3tZJ(kXs2gmHmZFvA))",
+		access_token: "",
 	},
 
 	//requiresVersion: "2.1.0", // Required version of MagicMirror
